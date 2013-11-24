@@ -1,3 +1,5 @@
+import java.util.BitSet;
+
 
 public class Test {
 
@@ -5,29 +7,14 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		long start = System.currentTimeMillis();
+		//BitSet bitset = new BitSet(500000000);
+		/*for(int i=0;i<bitset.length();i++){
+			bitset.set(i);
+		}*/
+		System.out.println("time: "+(System.currentTimeMillis()-start));
+		System.out.println(1000>>6);
 		
-		String s0 = "你test-baidu-0.baidu.com";
-		String s1 = "你test-baidu-1.baidu.com";
-		String s2 = "你test-baidu-12.baidu.com";
-		System.out.println((int)'-');
-		System.out.println((int)'a');
-		System.out.println((int)'b');
-		int num0 = 0;
-		int num1 = 0;
-		int num2 = 0;
-		for(int i=0;i<s0.length();i++){
-			num0 += (int)s0.charAt(i);
-		}
-
-		for(int i=0;i<s1.length();i++){
-			num1 += (int)s1.charAt(i);
-		}
-		
-		for(int i=0;i<s2.length();i++){
-			num2 += (int)s2.charAt(i);
-		}
-		System.out.println(compare(s1,s2));
 	}
 
 	/**
