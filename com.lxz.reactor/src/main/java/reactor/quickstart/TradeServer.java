@@ -7,11 +7,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.glassfish.grizzly.utils.LinkedTransferQueue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Jon Brisbin
  */
 public class TradeServer {
+	private static final Logger LOG = LoggerFactory.getLogger(TradeServer.class);
 	final BlockingQueue<Order> buys = new LinkedTransferQueue<Order>();
 	final BlockingQueue<Order> sells = new LinkedTransferQueue<Order>();
 	final AtomicBoolean active = new AtomicBoolean(true);
@@ -33,9 +36,11 @@ public class TradeServer {
 			while (active.get()) {
 				try {
 					// Pull Orders off the queue and process them
-					buys.poll(100, TimeUnit.MILLISECONDS);
-					sells.poll(100, TimeUnit.MILLISECONDS);
-				} catch (InterruptedException e) {
+					Order bOrder = buys.poll();
+					Order sOrder = sells.poll();
+					LOG.debug("border: "+bOrder.getTrade().getId());
+					LOG.debug("sorder: "+sOrder.getTrade().getId());
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

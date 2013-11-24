@@ -19,7 +19,7 @@ import reactor.function.Consumer;
 public class TradeServerExample {
 	private static final Logger LOG = LoggerFactory.getLogger(TradeServerExample.class);
 	private static CountDownLatch latch;
-	private static int totalTrades = 10000000;
+	private static int totalTrades = 10000;
 	private static long startTime;
 	private static long endTime;
 	private static double elapsed;
@@ -38,6 +38,7 @@ public class TradeServerExample {
 		reactor.on(Selectors.object(topic), new Consumer<Event<Trade>>() {
 			@Override
 			public void accept(Event<Trade> tradeEvent) {
+			    LOG.debug("tradeEvent: "+tradeEvent.getData().getSymbol());
 				server.execute(tradeEvent.getData());
 
 				// Since we're async, for this test, use a latch to tell when
